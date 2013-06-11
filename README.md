@@ -1,5 +1,5 @@
-twitchtvchecker
-===============
+PHP Twitch.tv Live Checker
+==========================
 
 PHP Twitch.tv Live Status Checker
 
