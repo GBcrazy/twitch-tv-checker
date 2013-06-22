@@ -4,12 +4,15 @@ require_once 'twitchtvchecker.class.php';
 
 if (php_sapi_name() != 'cli') {
 	header('content-type:text/plain');
+	$verbose = true;
+} else {
+	$verbose = false;
 }
 
 echo "\nTwitch.tv API by Andreas Lutro (C) 2013\n\n";
 
 try {
-	$checker = new TwitchTvChecker;
+	$checker = new TwitchTvChecker($verbose);
 	$streams = array(
 		array(
 			'url' => 'http://www.twitch.tv/qlrankstv',

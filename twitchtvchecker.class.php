@@ -1,10 +1,30 @@
 <?php
+/**
+ * Checks for live twitch.tv streams.
+ *
+ * @package    TwitchTvChecker
+ * @version    1.1
+ * @author     Andreas Lutro
+ * @uses       TwitchTvStream
+ * @copyright  2013 Andreas Lutro
+ */
 class TwitchTvChecker
 {
+	protected $verbose;
+	protected $checked = false;
+
 	protected $streams = array();
 	protected $streams_csl;
-	protected $checked = false;
-	protected $live_streams;
+	protected $live_streams = array();
+
+	/**
+	 * Create a new checker instance.
+	 * @param boolean $verbose Whether to echo information about the process or not.
+	 */
+	public function __construct($verbose=false)
+	{
+		$this->verbose = $verbose;
+	}
 
 	/**
 	 * Add a stream to the checker.
@@ -73,9 +93,9 @@ class TwitchTvChecker
 		$url = 'http://api.justin.tv/api/stream/list.json?channel=' . $list;
 
 		// @todo implement a safer way to fetch the remote file
-		echo "Waiting for Twitch.tv server... ";
+		if ($this->verbose) echo "Waiting for Twitch.tv server... ";
 		$json = file_get_contents($url);
-		echo "Response received!\n\n";
+		if ($this->verbose) echo "Response received!\n\n";
 
 		if (!$json) {
 			return false;
@@ -86,7 +106,10 @@ class TwitchTvChecker
 		// clear and prepare the live streams array
 		$this->live_streams = array();
 
+		// iterate through the streams to check if they're live or not
 		for ($i=0; $i < count($this->streams); $i++) {
+
+			// iterate through twitch.tv's returned data to check if stream is live
 			for ($j=0; $j < count($live_data); $j++) {
 
 				if ($live_data[$j]->channel->login == $this->streams[$i]->channel) {
@@ -97,14 +120,12 @@ class TwitchTvChecker
 						$this->live_streams[] = $this->streams[$i]->data;
 					}
 
-				}
-				elseif ($this->streams[$i]->live) {
+				} elseif ($this->streams[$i]->live) {
 
 					// make sure that offline streams are marked as such
 					$this->streams[$i]->live = false;
 
 				}
-
 			}
 		}
 
