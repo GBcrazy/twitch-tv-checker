@@ -43,26 +43,26 @@ It is recommended that you write a separate script not accessible to the public 
 
 These fields are automatically added to a stream that's live:
 
-* $stream->stream_title
-* $stream->stream_game
-* $stream->stream_viewers
-* $stream->stream_res_height
-* $stream->stream_res_width
-* $stream->stream_bitrate
-* $stream->stream_thumb_huge
-* $stream->stream_thumb_large
-* $stream->stream_thumb_medium
-* $stream->stream_thumb_small
-* $stream->stream_avatar_huge
-* $stream->stream_avatar_large
-* $stream->stream_avatar_medium
-* $stream->stream_avatar_small
-* $stream->stream_avatar_tiny
+* `$stream->stream_title`
+* `$stream->stream_game`
+* `$stream->stream_viewers`
+* `$stream->stream_res_height`
+* `$stream->stream_res_width`
+* `$stream->stream_bitrate`
+* `$stream->stream_thumb_huge`
+* `$stream->stream_thumb_large`
+* `$stream->stream_thumb_medium`
+* `$stream->stream_thumb_small`
+* `$stream->stream_avatar_huge`
+* `$stream->stream_avatar_large`
+* `$stream->stream_avatar_medium`
+* `$stream->stream_avatar_small`
+* `$stream->stream_avatar_tiny`
 
 You also, of course, have access to the URL and channel fields:
 
-* $stream->channel
-* $stream->url
+* `$stream->channel`
+* `$stream->url`
 
 ... as well as any additional fields you passed to it when instanciating.
 
