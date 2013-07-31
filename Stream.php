@@ -3,17 +3,38 @@
 /**
  * Parses and stores information about a Twitch.tv stream.
  *
- * @package    TwitchTvChecker 
  * @version    2.0
  * @author     Andreas Lutro <anlutro@gmail.com>
- * @copyright  2013 Andreas Lutro
- * @license    http://www.gnu.org/licenses/gpl.html GPL version 3 or later
  */
 class Stream
 {
+    /**
+     * Stores whether or not the stream has been checked for live status, and if
+     * it has, whether or not it's live.
+     *
+     * @var null|boolean
+     */
     protected $live = null;
+
+    /**
+     * We keep our own URL variable separate from the original data.
+     *
+     * @var string
+     */
     protected $url;
+
+    /**
+     * The name of the twitch.tv channel.
+     *
+     * @var string
+     */
     protected $channel;
+
+    /**
+     * The original data passed to the object.
+     *
+     * @var StdClass
+     */
     protected $data;
 
     /**
@@ -212,10 +233,32 @@ class Stream
         return true;
     }
 
+    /**
+     * Array with references to all Stream objects.
+     *
+     * @var array
+     */
     protected static $all_streams;
+
+    /**
+     * Live stream data from the Twitch.tv API.
+     *
+     * @var string
+     */
     protected static $live_data;
+
+    /**
+     * Whether or not we've retrieved live stream data during this request.
+     *
+     * @var boolean
+     */
     protected static $checked_live = false;
 
+    /**
+     * Get live status if we haven't checked already.
+     *
+     * @return void
+     */
     protected static function getLiveStatus()
     {
         if (!isset(self::$live_data)) {
