@@ -1,0 +1,13 @@
+{
+    "name": "anlutro/twitch-tv-checker",
+    "description": "Simple class interface for checking if twitch.tv streams are online or not.",
+    "authors": [
+        {
+            "name": "'Andreas",
+            "email": "anlutro@gmail.com"
+        }
+    ],
+    "require": {
+	"PHP": ">=5.3.0"
+    }
+}

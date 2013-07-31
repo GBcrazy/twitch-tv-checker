@@ -156,15 +156,21 @@ class Stream
 
             if ($at_channel_name) {
                 // this will be triggered when we're at the channel name
-                $this->channel = strtolower($part);
+                $channel = strtolower($part);
                 break;
             } else {
-                if (strpos($part, 'twitch.tv')) {
+                if (strpos($part, 'twitch.tv') !== false) {
                     // we know that the next bit will be the channel name
                     $at_channel_name = true;
                 }
             }
         }
+
+        if (!preg_match('/^[A-Za-z0-9_]+$/', $channel)) {
+            throw new \InvalidArgumentException('Invalid channel name.');
+        }
+        
+        $this->channel = $channel;
 
         // recreate the url to strip language etc. from it
         $this->url = 'http://www.twitch.tv/' . $this->channel;
